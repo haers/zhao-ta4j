@@ -140,6 +140,10 @@ public class MACDVIndicator extends CachedIndicator<Num> {
     }
 
     private MACDVIndicator(ValidatedConfig config) {
+        this(config, buildHelpers(config));
+    }
+
+    private static Helpers buildHelpers(ValidatedConfig config) {
         BarSeries series = config.priceIndicator().getBarSeries();
         VolumeIndicator volume = new VolumeIndicator(series);
         ATRIndicator shortAtr = new ATRIndicator(series, config.shortBarCount());
@@ -152,15 +156,23 @@ public class MACDVIndicator extends CachedIndicator<Num> {
                 EMAIndicator::new);
         VWMAIndicator longAverage = new VWMAIndicator(config.priceIndicator(), longWeights, config.longBarCount(),
                 EMAIndicator::new);
-        super(shortAtr, longAtr, shortAverage, longAverage);
+        return new Helpers(shortAtr, longAtr, shortAverage, longAverage);
+    }
+
+    private record Helpers(ATRIndicator shortAtr, ATRIndicator longAtr, VWMAIndicator shortAverage,
+            VWMAIndicator longAverage) {
+    }
+
+    private MACDVIndicator(ValidatedConfig config, Helpers helpers) {
+        super(helpers.shortAtr(), helpers.longAtr(), helpers.shortAverage(), helpers.longAverage());
         this.priceIndicator = config.priceIndicator();
         this.shortBarCount = config.shortBarCount();
         this.longBarCount = config.longBarCount();
         this.defaultSignalBarCount = config.signalBarCount();
-        this.shortAtrIndicator = shortAtr;
-        this.longAtrIndicator = longAtr;
-        this.shortTermVwema = shortAverage;
-        this.longTermVwema = longAverage;
+        this.shortAtrIndicator = helpers.shortAtr();
+        this.longAtrIndicator = helpers.longAtr();
+        this.shortTermVwema = helpers.shortAverage();
+        this.longTermVwema = helpers.longAverage();
     }
 
     private static void validateBarCounts(int shortBarCount, int longBarCount) {

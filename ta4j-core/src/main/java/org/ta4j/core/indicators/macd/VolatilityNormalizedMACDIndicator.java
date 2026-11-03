@@ -159,9 +159,13 @@ public class VolatilityNormalizedMACDIndicator extends CachedIndicator<Num> {
     }
 
     private VolatilityNormalizedMACDIndicator(ValidatedConfig config) {
-        EMAIndicator fast = new EMAIndicator(config.priceIndicator(), config.fastBarCount());
-        EMAIndicator slow = new EMAIndicator(config.priceIndicator(), config.slowBarCount());
-        ATRIndicator atr = new ATRIndicator(config.priceIndicator().getBarSeries(), config.atrBarCount());
+        this(config, new EMAIndicator(config.priceIndicator(), config.fastBarCount()),
+                new EMAIndicator(config.priceIndicator(), config.slowBarCount()),
+                new ATRIndicator(config.priceIndicator().getBarSeries(), config.atrBarCount()));
+    }
+
+    private VolatilityNormalizedMACDIndicator(ValidatedConfig config, EMAIndicator fast, EMAIndicator slow,
+            ATRIndicator atr) {
         super(fast, slow, atr);
         this.priceIndicator = config.priceIndicator();
         this.fastBarCount = config.fastBarCount();

@@ -156,7 +156,7 @@ event-synchronization (F1) workflow with a one-line grid/GA/PSO switch.
 
 The experimental Elliott pattern study (test scope, not public API) has a
 launcher, `ElliottResearch`, that writes one relocatable run directory per run.
-Prerequisites: JDK 25, Maven, and dependencies already cached; the `smoke`
+Prerequisites: JDK 21, Maven, and dependencies already cached; the `smoke`
 recipe is offline and finishes in seconds. Run from the repository root.
 
 Unix shells:

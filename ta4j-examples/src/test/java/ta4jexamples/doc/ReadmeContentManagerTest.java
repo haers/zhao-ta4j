@@ -92,11 +92,11 @@ public class ReadmeContentManagerTest {
                 "rhysd/actionlint@v1.7.9");
         List<Path> setupJavaWorkflows = new ArrayList<>();
 
-        assertTrue(pom.contains("<maven.compiler.release>25</maven.compiler.release>"));
+        assertTrue(pom.contains("<maven.compiler.release>21</maven.compiler.release>"));
         assertTrue(pom.contains("<requireJavaVersion>"));
-        assertTrue(pom.contains("<version>[25,)</version>"));
-        assertTrue(readme.contains("JDK-25%2B"));
-        assertTrue(readme.contains("Java 25+"));
+        assertTrue(pom.contains("<version>[21,)</version>"));
+        assertTrue(readme.contains("JDK-21%2B"));
+        assertTrue(readme.contains("Java 21+"));
         assertTrue(readme.contains("scripts/run-full-build-quiet.sh"));
         assertTrue(readme.contains("scripts/run-full-build-quiet.ps1"));
         assertTrue(readme.contains(
@@ -104,15 +104,15 @@ public class ReadmeContentManagerTest {
         assertTrue(readme.contains(
                 "./mvnw -B clean license:check spotless:check verify -Dta4j.excludedTestTags=analysis-demo,benchmark,requires-display,requires-headless"));
         assertTrue(readme.contains("./mvnw -B license:format spotless:apply"));
-        assertTrue(contributing.contains("Java 25+"));
+        assertTrue(contributing.contains("Java 21+"));
 
         try (Stream<Path> workflowPaths = Files.list(repositoryRoot.resolve(".github").resolve("workflows"))) {
             workflowPaths.filter(path -> path.getFileName().toString().endsWith(".yml")).forEach(path -> {
                 String workflow = readString(path);
                 if (workflow.contains("actions/setup-java")) {
                     setupJavaWorkflows.add(path);
-                    assertTrue(workflow.contains("java-version: 25"), path + " should set up Java 25");
-                    assertFalse(workflow.contains("java-version: 21"), path + " should not set up Java 21");
+                    assertTrue(workflow.contains("java-version: 21"), path + " should set up Java 21");
+                    assertFalse(workflow.contains("java-version: 25"), path + " should not set up Java 25");
                 }
                 expectedActionPins.forEach((actionPrefix, expectedPin) -> {
                     if (workflow.contains(actionPrefix)) {

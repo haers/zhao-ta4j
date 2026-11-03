@@ -98,20 +98,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Set up JDK 25 (dry-run without publishing secrets)
+      - name: Set up JDK 21 (dry-run without publishing secrets)
         if: steps.dry_run.outputs.dryRun == 'true'
         uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: 25
+          java-version: 21
           cache: maven
 
-      - name: Set up JDK 25 with publishing secrets
+      - name: Set up JDK 21 with publishing secrets
         if: steps.dry_run.outputs.dryRun != 'true'
         uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: 25
+          java-version: 21
           cache: maven
           server-id: central
           server-username: ${{ secrets.MAVEN_CENTRAL_TOKEN_USER }}

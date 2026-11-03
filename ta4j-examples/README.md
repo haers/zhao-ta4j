@@ -5,7 +5,7 @@ It is organized as progressive learning tracks so production-minded Java develop
 
 ## Prerequisites
 
-- JDK 25+
+- JDK 21+
 - Maven 3.9+
 - Build from the repository root where `ta4j-core` and `ta4j-examples` are both available
 

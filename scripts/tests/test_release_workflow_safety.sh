@@ -99,8 +99,8 @@ assert_no_github_script_injected_binding_redeclarations() {
   ' "$workflow"
 }
 
-test_maven_workflow_jobs_setup_jdk25_before_maven() {
-  echo "Running test_maven_workflow_jobs_setup_jdk25_before_maven"
+test_maven_workflow_jobs_setup_jdk21_before_maven() {
+  echo "Running test_maven_workflow_jobs_setup_jdk21_before_maven"
 
   local maven_run_regex='(^|[[:space:]"({;])xvfb-run[[:space:]]+(\./)?mvnw?([[:space:]-]|\.cmd)|(^|[[:space:]"({;])(\./)?mvnw?([[:space:]-]|\.cmd)'
   local workflow
@@ -116,7 +116,7 @@ test_maven_workflow_jobs_setup_jdk25_before_maven() {
         sub(/:$/, "", job)
         setup = 0
         temurin = 0
-        jdk25 = 0
+        jdk21 = 0
         next
       }
       /^[^[:space:]]/ && $0 !~ /^jobs:/ {
@@ -125,21 +125,21 @@ test_maven_workflow_jobs_setup_jdk25_before_maven() {
       /uses: actions\/setup-java@v5/ {
         setup = 1
         temurin = 0
-        jdk25 = 0
+        jdk21 = 0
       }
       setup && /distribution: temurin/ { temurin = 1 }
-      setup && /java-version: 25/ { jdk25 = 1 }
+      setup && /java-version: 21/ { jdk21 = 1 }
       /^[[:space:]]*#/ { next }
       $0 ~ ENVIRON["MAVEN_RUN_REGEX"] {
-        if (!setup || !temurin || !jdk25) {
-          printf("[FAIL] %s job %s runs Maven before Temurin JDK 25 setup at line %d\n", file, job ? job : "(unknown)", NR) > "/dev/stderr"
+        if (!setup || !temurin || !jdk21) {
+          printf("[FAIL] %s job %s runs Maven before Temurin JDK 21 setup at line %d\n", file, job ? job : "(unknown)", NR) > "/dev/stderr"
           exit 1
         }
       }
     ' "$workflow"
   done
 
-  pass "test_maven_workflow_jobs_setup_jdk25_before_maven"
+  pass "test_maven_workflow_jobs_setup_jdk21_before_maven"
 }
 
 test_mutating_manual_workflows_default_to_dry_run() {
@@ -714,7 +714,7 @@ YAML
   pass "test_github_script_binding_scan_rejects_bad_fixture"
 }
 
-test_maven_workflow_jobs_setup_jdk25_before_maven
+test_maven_workflow_jobs_setup_jdk21_before_maven
 test_mutating_manual_workflows_default_to_dry_run
 test_official_triggers_normalize_to_non_dry_run
 test_release_scheduler_uses_true_biweekly_cadence_guard

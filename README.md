@@ -1,4 +1,9 @@
-# ta4j  [![Run Verify](https://github.com/ta4j/ta4j/actions/workflows/test.yml/badge.svg)](https://github.com/ta4j/ta4j/actions/workflows/test.yml) [![Discord](https://img.shields.io/discord/745552125769023488.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/HX9MbWZ) [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) ![Maven Central](https://img.shields.io/maven-central/v/org.ta4j/ta4j-parent?color=blue&label=Version) ![JDK](https://img.shields.io/badge/JDK-25%2B-orange)
+# ta4j  [![Run Verify](https://github.com/ta4j/ta4j/actions/workflows/test.yml/badge.svg)](https://github.com/ta4j/ta4j/actions/workflows/test.yml) [![Discord](https://img.shields.io/discord/745552125769023488.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/HX9MbWZ) [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) ![Maven Central](https://img.shields.io/maven-central/v/org.ta4j/ta4j-parent?color=blue&label=Version) ![JDK](https://img.shields.io/badge/JDK-21%2B-orange)
+
+> **Java 21 派生分支**：本分支基于官方 [0.28.0](https://github.com/ta4j/ta4j/releases/tag/0.28.0)，
+> Maven 版本为 `0.28.0-zhao-jdk21.1`，需从源码本地安装，不能直接从 Maven Central 获取。
+> `master` 保持跟随上游 Java 25。改动范围、构建命令及接入边界见 [Java 21 使用说明](docs/jdk21.md)。
+
 
 **Technical Analysis for Java**
 
@@ -31,7 +36,7 @@ The goal is **reproducible research**, not guaranteed returns. ta4j helps you st
 
 ## Install in seconds
 
-ta4j requires **Java 25+**. Most applications need only `ta4j-core`:
+ta4j requires **Java 21+**. Most applications need only `ta4j-core`:
 
 <!-- TA4J_VERSION_BLOCK:core:stable:begin -->
 
@@ -39,7 +44,7 @@ ta4j requires **Java 25+**. Most applications need only `ta4j-core`:
 <dependency>
   <groupId>org.ta4j</groupId>
   <artifactId>ta4j-core</artifactId>
-  <version>0.28.0</version>
+  <version>0.28.0-zhao-jdk21.1</version>
 </dependency>
 ```
 
@@ -79,7 +84,7 @@ Stable examples artifact:
 <dependency>
   <groupId>org.ta4j</groupId>
   <artifactId>ta4j-examples</artifactId>
-  <version>0.28.0</version>
+  <version>0.28.0-zhao-jdk21.1</version>
 </dependency>
 ```
 
@@ -458,7 +463,7 @@ Contributor reference:
 <details>
 <summary>Contributor build and verification commands</summary>
 
-The repository requires Java 25+ and includes Maven Wrapper scripts pinned to Maven 3.9.16.
+The repository requires Java 21+ and includes Maven Wrapper scripts pinned to Maven 3.9.16.
 
 - Standard wrapper: use `./mvnw ...` on macOS/Linux, `mvnw.cmd ...` on Windows, or system Maven 3.9+ intentionally.
 - Canonical quality gate: Use `scripts/run-full-build-quiet.sh` on macOS/Linux/Git Bash/WSL or `scripts/run-full-build-quiet.ps1` on Windows PowerShell; it uses native Maven and WSL preflight when available, with Git Bash as the fallback.

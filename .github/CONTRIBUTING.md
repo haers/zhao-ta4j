@@ -19,7 +19,7 @@ ta4j has been around for years and serves a large, diverse user base. Contributi
 
 ## Contribution checklist
 
-1. **Use Java 25+ and Maven 3.9+.** The build enforces these versions during Maven validation.
+1. **Use Java 21+ and Maven 3.9+.** The build enforces these versions during Maven validation.
 2. **Start with an issue** for anything non-trivial. Use it to confirm fit with the [Roadmap](https://ta4j.github.io/ta4j-wiki/Roadmap-and-Tasks.html) and to align on scope. [Search existing issues](https://github.com/ta4j/ta4j/issues?q=is%3Aissue) before opening a new one.
 3. **Fork & branch** from `master`.
    ```bash
