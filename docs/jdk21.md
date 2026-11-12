@@ -6,6 +6,13 @@
 
 Maven 版本为 `0.28.0-zhao-jdk21.1`，避免与官方构件同名覆盖。未发布到 Maven Central，需要从源码安装。
 
+源码通过 [Java 21 分支](https://github.com/haers/zhao-ta4j/tree/jdk21)提供。获取源码后，在该分支执行下方构建命令，再由消费工程通过 Maven 引入派生版版本号。
+
+```sh
+git clone --branch jdk21 https://github.com/haers/zhao-ta4j.git
+cd zhao-ta4j
+```
+
 ## 改动范围
 
 - 编译 release、Enforcer、CI、README 和基线一致性测试统一为 Java 21。
@@ -34,7 +41,7 @@ mvn -B -ntp install
 </dependency>
 ```
 
-当前未修改 kit POM 或交易业务；未来由 kit-quant 统一适配输入、暖机和回测边界。TA4J 提供指标与回测能力，不负责实盘下单。默认完整门禁沿用上游测试标签范围；演示、基准、需显示器等标签不属于默认门禁，未据此宣称真实行情或实盘验证。
+消费工程可将该核心库作为普通 Maven 依赖使用，并按自身需求定义行情输入、指标暖机和回测边界。TA4J 提供指标、规则、策略与回测组件，交易平台连接及订单执行由消费工程实现。默认完整门禁沿用上游测试标签范围，覆盖范围以构建脚本和测试标签配置为准。
 
 ## 验证记录
 
@@ -49,9 +56,7 @@ mvn -B -ntp install
 | 字节码 | core 1483 个类最大 major 65；core 测试类路径共 32 个 jar 的 Java21 有效类均不超过 65，排除仅更高 JDK 生效的多版本条目 |
 | 独立消费 | 仅 core jar 与 slf4j-api、commons-math3、gson 三个正式依赖，真实 Java21 下编译并运行固定 K 线程序，SMA(3)=5 |
 
-本机完整门禁日志：`.agents/logs/full-build-20261103-120057.log`；定向回归 `.agents/jdk21-focused.log`，独立消费 `.agents/jdk21-consumer.log`，字节码证据 `.agents/jdk21-bytecode.json`。日志为本机验收资料，不随源码发布。
-
-本分支仅本地维护，尚未推送或发布构件，也未安装到消费工程。以上证明该候选在 Java21 的构建、适用回归与最小消费通过；不代表 kit 接入或真实交易验收。
+以上为固定派生源码在所列日期的验证结果。运行完整门禁脚本时会输出当前环境的日志位置，复核时以新生成的结果为准。消费方接入后的依赖组合、数据与交易流程需要在其所属工程中验证。
 
 ## 后续同步
 
